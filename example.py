@@ -9,7 +9,7 @@ filters = SearchFilters(
             rt = 4.5
         )
 
-results = search("Zenbook 14 32GB", max_result=100, debug=False)
+results = search("mouse logitech", max_result=100, debug=False)
 for result in results:
     combine_data(
         result,
@@ -17,5 +17,8 @@ for result in results:
         get_reviews(product_id=result.product_id, max_result=20, debug=True)
     )
 
-with open('log.json','w') as f:
+# Save results to output.json
+with open('output.json', 'w') as f:
     f.write(json.dumps(results.json(), indent=4))
+
+print(f"Results saved to output.json with {len(results)} products") 
