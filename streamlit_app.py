@@ -436,21 +436,6 @@ def display_analysis(data, df):
     insights = generate_insights(df)
     for insight in insights:
         st.markdown(f'<div class="insight-box">💡 {insight}</div>', unsafe_allow_html=True)
-    
-    # Review analysis (if available)
-    positive_count, negative_count, common_words = extract_review_insights(data)
-    if positive_count is not None:
-        st.subheader("📝 Analisis Review")
-        
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.metric("Sentiment Positif", positive_count)
-        with col2:
-            st.metric("Sentiment Negatif", negative_count)
-        with col3:
-            sentiment_ratio = positive_count / (positive_count + negative_count) if (positive_count + negative_count) > 0 else 0
-            st.metric("Rasio Positif", f"{sentiment_ratio:.2%}")
         
         # Word cloud
         if common_words:
@@ -465,13 +450,6 @@ def display_analysis(data, df):
     # Interactive visualizations
     st.markdown('<h2 class="section-header">📊 Visualisasi Interaktif</h2>', unsafe_allow_html=True)
     
-    # Multi-dimensional analysis
-    if 'real_price' in df.columns and 'rating' in df.columns and 'sold_count' in df.columns:
-        fig = px.scatter_3d(df, x='real_price', y='rating', z='sold_count',
-                           color='rating', size='sold_count',
-                           title="Analisis 3D: Harga vs Rating vs Jumlah Terjual",
-                           labels={'real_price': 'Harga (Rp)', 'rating': 'Rating', 'sold_count': 'Terjual'})
-        st.plotly_chart(fig, use_container_width=True)
     
     # Correlation heatmap
     numeric_cols = df.select_dtypes(include=[np.number]).columns
