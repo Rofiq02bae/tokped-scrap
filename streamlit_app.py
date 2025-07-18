@@ -18,7 +18,7 @@ from tokopaedi import search, SearchFilters, get_product, get_reviews, combine_d
 
 # Page configuration
 st.set_page_config(
-    page_title="Tokopedia Data Scraper & Analyzer",
+    page_title="analisis penjualan produk mouse logitech",
     page_icon="🛒",
     layout="wide",
     initial_sidebar_state="expanded"
