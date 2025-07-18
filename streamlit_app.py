@@ -127,7 +127,7 @@ def extract_review_insights(data):
 
 def main():
     # Header
-    st.markdown('<h1 class="main-header">🛒 Tokopedia Data Scraper & Analyzer</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">🛒analisis penjualan produk mouse logitech</h1>', unsafe_allow_html=True)
     st.markdown("Aplikasi untuk scraping, analisis, dan visualisasi data produk Tokopedia")
     
     # Sidebar - Filters and Controls
