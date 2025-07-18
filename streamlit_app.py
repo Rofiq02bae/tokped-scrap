@@ -288,21 +288,7 @@ def show_welcome_page():
     
     with col1:
         st.markdown("""
-        ### 🎯 Fitur Aplikasi:
-        
-        1. **🔍 Scraping Data**: Ambil data produk langsung dari Tokopedia
-        2. **🔧 Filter Lanjutan**: Saring hasil berdasarkan harga, rating, dan lainnya
-        3. **📊 Preprocessing**: Bersihkan dan siapkan data untuk analisis
-        4. **📈 EDA (Exploratory Data Analysis)**: Analisis statistik deskriptif
-        5. **💡 Insight Analysis**: Temukan pola dan tren menarik
-        6. **📊 Visualisasi Interaktif**: Chart dan grafik yang dinamis
-        7. **📝 Kesimpulan**: Ringkasan temuan utama
-        
-        ### 🚀 Cara Menggunakan:
-        1. Atur parameter pencarian di sidebar
-        2. Klik "Mulai Scraping" untuk mengambil data baru
-        3. Atau klik "Load Sample Data" untuk menggunakan data contoh
-        4. Lihat hasil analisis dan visualisasi
+        selamat datang
         """)
     
     with col2:
