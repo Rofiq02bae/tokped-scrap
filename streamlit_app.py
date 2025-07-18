@@ -437,6 +437,25 @@ def display_analysis(data, df):
     for insight in insights:
         st.markdown(f'<div class="insight-box">💡 {insight}</div>', unsafe_allow_html=True)
         
+    # Review analysis (if available)
+    positive_count, negative_count, common_words = extract_review_insights(data)
+    if positive_count is not None:
+        st.subheader("📝 Analisis Review")
+        
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.metric("Sentiment Positif", positive_count)
+        with col2:
+            st.metric("Sentiment Negatif", negative_count)
+        with col3:
+            sentiment_ratio = positive_count / (positive_count + negative_count) if (positive_count + negative_count) > 0 else 0
+            st.metric("Rasio Positif", f"{sentiment_ratio:.2%}")
+        
+        # Word cloud
+        if common_words:
+            st.subheader("☁️ Word Cloud Review")
+
         # Word cloud
         if common_words:
             st.subheader("☁️ Word Cloud Review")
