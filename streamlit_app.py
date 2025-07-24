@@ -18,7 +18,7 @@ from tokopaedi import search, SearchFilters, get_product, get_reviews, combine_d
 
 # Page configuration
 st.set_page_config(
-    page_title="analisis penjualan produk mouse logitech",
+    page_title="Tokopedia Data Scraper & Analyzer",
     page_icon="🛒",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -127,7 +127,7 @@ def extract_review_insights(data):
 
 def main():
     # Header
-    st.markdown('<h1 class="main-header">🛒analisis penjualan produk mouse logitech</h1>', unsafe_allow_html=True)
+    st.markdown('<h1 class="main-header">🛒 Tokopedia Data Scraper & Analyzer</h1>', unsafe_allow_html=True)
     st.markdown("Aplikasi untuk scraping, analisis, dan visualisasi data produk Tokopedia")
     
     # Sidebar - Filters and Controls
@@ -288,7 +288,21 @@ def show_welcome_page():
     
     with col1:
         st.markdown("""
-        selamat datang
+        ### 🎯 Fitur Aplikasi:
+        
+        1. **🔍 Scraping Data**: Ambil data produk langsung dari Tokopedia
+        2. **🔧 Filter Lanjutan**: Saring hasil berdasarkan harga, rating, dan lainnya
+        3. **📊 Preprocessing**: Bersihkan dan siapkan data untuk analisis
+        4. **📈 EDA (Exploratory Data Analysis)**: Analisis statistik deskriptif
+        5. **💡 Insight Analysis**: Temukan pola dan tren menarik
+        6. **📊 Visualisasi Interaktif**: Chart dan grafik yang dinamis
+        7. **📝 Kesimpulan**: Ringkasan temuan utama
+        
+        ### 🚀 Cara Menggunakan:
+        1. Atur parameter pencarian di sidebar
+        2. Klik "Mulai Scraping" untuk mengambil data baru
+        3. Atau klik "Load Sample Data" untuk menggunakan data contoh
+        4. Lihat hasil analisis dan visualisasi
         """)
     
     with col2:
@@ -436,7 +450,7 @@ def display_analysis(data, df):
     insights = generate_insights(df)
     for insight in insights:
         st.markdown(f'<div class="insight-box">💡 {insight}</div>', unsafe_allow_html=True)
-        
+    
     # Review analysis (if available)
     positive_count, negative_count, common_words = extract_review_insights(data)
     if positive_count is not None:
@@ -455,10 +469,6 @@ def display_analysis(data, df):
         # Word cloud
         if common_words:
             st.subheader("☁️ Word Cloud Review")
-
-        # Word cloud
-        if common_words:
-            st.subheader("☁️ Word Cloud Review")
             wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(common_words)
             
             fig, ax = plt.subplots(figsize=(10, 5))
@@ -469,6 +479,13 @@ def display_analysis(data, df):
     # Interactive visualizations
     st.markdown('<h2 class="section-header">📊 Visualisasi Interaktif</h2>', unsafe_allow_html=True)
     
+    # Multi-dimensional analysis
+    if 'real_price' in df.columns and 'rating' in df.columns and 'sold_count' in df.columns:
+        fig = px.scatter_3d(df, x='real_price', y='rating', z='sold_count',
+                           color='rating', size='sold_count',
+                           title="Analisis 3D: Harga vs Rating vs Jumlah Terjual",
+                           labels={'real_price': 'Harga (Rp)', 'rating': 'Rating', 'sold_count': 'Terjual'})
+        st.plotly_chart(fig, use_container_width=True)
     
     # Correlation heatmap
     numeric_cols = df.select_dtypes(include=[np.number]).columns
